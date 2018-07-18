@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.machine.learning.storage.mapper.HouseMapper">
+
+    <!--根据id查询数据-->
+    <select id="findHouseInfoById" parameterType="int" resultType="AnJuKeHoseEvt">
+        select * from analysis_house_info where id = #{id}
+    </select>
+    
+    <insert id="addHouseInfo" parameterType="AnJuKeHoseEvt" keyProperty="id" useGeneratedKeys="true">
+        INSERT  INTO  analysis_house_info(houseName,price,lng,lat,aroundPrice,address,url,content) values(#{houseName},#{price},#{lng},#{lat},#{aroundPrice},#{address},#{url},#{content})
+    </insert>
+    <select id="queryHoseList" parameterType="PageEvt" resultType="AnJuKeHoseEvt">
+        select * from analysis_house_info limit (#{page-1}*#{pageNum}+1,#{page}*#{pageNum})
+    </select>
+</mapper>
